@@ -84,7 +84,7 @@ int main(int args, char const *argv[])
 
     while (true)
     {
-        if (page == SIGNUPPAGE)
+        if (( loginFormCursor != 3 || signFormCursor != 4) && (page == SIGNUPPAGE || page == LOGINPAGE))
             curs_set(1);
         else
             curs_set(0); // 0: 커서 없애기, 1: 커서 보이기
@@ -130,6 +130,7 @@ int main(int args, char const *argv[])
             mainPage();
             break;
         }
+
     }
     endwin(); // 끝 내는 함수
     close(fd);
@@ -162,7 +163,7 @@ void loginPage()
     WINDOW *win3 = newwin(1, 1, 4, 33);  // 높이, 넓이 ,x축 이동, y축 이동
     wbkgd(win1, COLOR_PAIR(1));          //  init_pair로 정의한 색상번호
     wbkgd(win2, COLOR_PAIR(2));
-
+    curs_set(1);
     mvwprintw(win1, 4, 28, "ID:");    // 윈도우, x , y, 문자
     mvwprintw(win1, 6, 28, "PW:");    // 윈도우, x , y, 문자
     mvwprintw(win1, 10, 33, "Login"); // 윈도우, x , y, 문자
@@ -179,7 +180,6 @@ void loginPage()
     }
     else if (loginFormCursor == 3)
     {
-        curs_set(0);
         win3 = newwin(1, 1, 10, 31); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(1));
         mvwprintw(win3, 0, 0, ">"); // 특정 윈도우 특정 위치에 문자열을 출력함
@@ -189,6 +189,7 @@ void loginPage()
     wrefresh(win1);                          // window 갱싱
     wrefresh(win2);
     wrefresh(win3);
+  
 }
 
 void signPage()
@@ -225,7 +226,6 @@ void signPage()
     }
     else if (signFormCursor == 4)
     {
-        curs_set(0);
         win3 = newwin(1, 1, 14, 28); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(1));
         mvwprintw(win3, 0, 0, ">"); // 특정 윈도우 특정 위치에 문자열을 출력함
@@ -367,8 +367,12 @@ void menuKeyEvent()
 
 void loginKeyEvent()
 {
+    if(loginFormCursor == 3){
+        curs_set(0);
+    }
     if (key == KEY_UP)
     {
+        
         if (loginFormCursor >= 2)
             loginFormCursor--;
         else
