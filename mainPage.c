@@ -84,10 +84,8 @@ int main(int args, char const *argv[])
 
     while (true)
     {
-        if (page == SIGNUPPAGE)
-            curs_set(1);
-        else
-            curs_set(0); // 0: 커서 없애기, 1: 커서 보이기
+
+        curs_set(0); // 0: 커서 없애기, 1: 커서 보이기
 
         keypad(stdscr, true); // 특수키 입력 허용
         noecho();             //입력한 값을 화면에 보이지 함
@@ -169,11 +167,13 @@ void loginPage()
 
     if (loginFormCursor == 1)
     {
+        curs_set(1);
         win3 = newwin(1, 1, 4, 31 + user->idCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (loginFormCursor == 2)
     {
+        curs_set(1);
         win3 = newwin(1, 1, 6, 31 + user->pwCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
@@ -209,23 +209,22 @@ void signPage()
     }
 
     if (signFormCursor == 1)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 4, 33 + user->nameCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 2)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 6, 31 + user->idCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 3)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 8, 31 + user->pwCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 4)
-    {
-        curs_set(0);
+    {   curs_set(0);
         win3 = newwin(1, 1, 14, 28); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(1));
         mvwprintw(win3, 0, 0, ">"); // 특정 윈도우 특정 위치에 문자열을 출력함
