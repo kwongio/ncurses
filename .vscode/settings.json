@@ -8,6 +8,7 @@
         "string.h": "c",
         "login.h": "c",
         "fcntl.h": "c",
-        "stat.h": "c"
+        "stat.h": "c",
+        "stdlib.h": "c"
     }
 }

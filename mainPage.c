@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <unistd.h>
+#include<stdlib.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -84,10 +85,8 @@ int main(int args, char const *argv[])
 
     while (true)
     {
-        if (( loginFormCursor != 3 || signFormCursor != 4) && (page == SIGNUPPAGE || page == LOGINPAGE))
-            curs_set(1);
-        else
-            curs_set(0); // 0: 커서 없애기, 1: 커서 보이기
+
+        curs_set(0); // 0: 커서 없애기, 1: 커서 보이기
 
         keypad(stdscr, true); // 특수키 입력 허용
         noecho();             //입력한 값을 화면에 보이지 함
@@ -170,11 +169,13 @@ void loginPage()
 
     if (loginFormCursor == 1)
     {
+        curs_set(1);
         win3 = newwin(1, 1, 4, 31 + user->idCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (loginFormCursor == 2)
     {
+        curs_set(1);
         win3 = newwin(1, 1, 6, 31 + user->pwCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
@@ -210,28 +211,32 @@ void signPage()
     }
 
     if (signFormCursor == 1)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 4, 33 + user->nameCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 2)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 6, 31 + user->idCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 3)
-    {
+    {   curs_set(1);
         win3 = newwin(1, 1, 8, 31 + user->pwCount); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(2));
     }
     else if (signFormCursor == 4)
     {
+        curs_set(0);
         win3 = newwin(1, 1, 14, 28); // 높이, 넓이 ,x축 이동, y축 이동
         wbkgd(win3, COLOR_PAIR(1));
         mvwprintw(win3, 0, 0, ">"); // 특정 윈도우 특정 위치에 문자열을 출력함
     }
+    char temp[10];
+
+    itoa(user->id, temp, 10);
     mvwprintw(win1, 4, 33, user->name);      // 특정 윈도우 특정 위치에 문자열을 출력함
-    mvwprintw(win1, 6, 31, user->id);        // 특정 윈도우 특정 위치에 문자열을 출력함
+    mvwprintw(win1, 6, 31, temp);        // 특정 윈도우 특정 위치에 문자열을 출력함
     mvwprintw(win1, 8, 31, user->pwEncrypt); // 특정 윈도우 특정 위치에 문자열을 출력함
     wrefresh(win1);                          // window 갱싱
     wrefresh(win2);
@@ -275,7 +280,9 @@ void mainPage()
     }
     // TODO
     mvwprintw(win2, 0, 0, "ID: ");
-    mvwprintw(win2, 0, 3, user->id);
+    itoa
+    mvwinnstr(win2, 0, 3, user->id);
+    // mvwprintw(win2, 0, 3, user->id);
     mvwprintw(win2, 1, 0, "Name: ");
     mvwprintw(win2, 1, 5, user->name);
     mvwprintw(win2, 0, 74, "Logout");
