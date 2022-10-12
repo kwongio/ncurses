@@ -232,11 +232,9 @@ void signPage()
         wbkgd(win3, COLOR_PAIR(1));
         mvwprintw(win3, 0, 0, ">"); // 특정 윈도우 특정 위치에 문자열을 출력함
     }
-    char temp[10];
 
-    itoa(user->id, temp, 10);
     mvwprintw(win1, 4, 33, user->name);      // 특정 윈도우 특정 위치에 문자열을 출력함
-    mvwprintw(win1, 6, 31, temp);        // 특정 윈도우 특정 위치에 문자열을 출력함
+    mvwprintw(win1, 6, 31, user->id);        // 특정 윈도우 특정 위치에 문자열을 출력함
     mvwprintw(win1, 8, 31, user->pwEncrypt); // 특정 윈도우 특정 위치에 문자열을 출력함
     wrefresh(win1);                          // window 갱싱
     wrefresh(win2);
@@ -279,9 +277,9 @@ void mainPage()
         }
     }
     // TODO
+    char* id = user->id - 'a';
     mvwprintw(win2, 0, 0, "ID: ");
-    itoa
-    mvwinnstr(win2, 0, 3, user->id);
+    mvwprintw(win2, 0, 3, id);
     // mvwprintw(win2, 0, 3, user->id);
     mvwprintw(win2, 1, 0, "Name: ");
     mvwprintw(win2, 1, 5, user->name);
