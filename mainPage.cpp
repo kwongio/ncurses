@@ -87,7 +87,7 @@ int main(int args, char const *argv[])
     {
       
   if((page == LOGINPAGE || page == SIGNUPPAGE) && loginFormCursor != 3 && signFormCursor != 4 ){
-            curs_set(2);
+            curs_set(1);
         }else{
             curs_set(0);
         }
@@ -450,7 +450,6 @@ void loginKeyEvent()
                     wrefresh(win2);
                     key = getch();
                     newuser();
-                    loginFormCursor = 1;
                 }
                 else if (isPasswordWrong && page != MAINPAGE)
                 {
@@ -462,8 +461,8 @@ void loginKeyEvent()
                     wrefresh(win2);
                     key = getch();
                     newuser();
-                    loginFormCursor = 1;
                 }
+                loginFormCursor = 1;
 
                 close(fd2);
             }
@@ -535,7 +534,6 @@ void signKeyEvent()
                         mvwprintw(win2, 0, 25, "Already exigts ID"); // 윈도우, x , y, 문자
                         wrefresh(win2);
                         key = getch();
-                        signFormCursor = 1;
                         break;
                     }
                     free(readUser);
@@ -549,6 +547,8 @@ void signKeyEvent()
                     userCount++;
                     page = LOGINPAGE;
                 }
+                signFormCursor = 1;
+
                 newuser();
                 close(fd2);
             }
