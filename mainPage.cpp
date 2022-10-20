@@ -87,7 +87,7 @@ int main(int args, char const *argv[])
     {
       
   if((page == LOGINPAGE || page == SIGNUPPAGE) && loginFormCursor != 3 && signFormCursor != 4 ){
-            curs_set(1);
+            curs_set(2);
         }else{
             curs_set(0);
         }
